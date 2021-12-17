@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "config.cpp"
+#include "config.h"
 
 void error(const char *msg)
 {
