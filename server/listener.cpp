@@ -17,7 +17,6 @@ void newConnection(int newsockfd, int clilen, struct sockaddr_in cli_addr) {
 
      printf("server: got connection from %s port %d\n", inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port)); 
 
-
      send(newsockfd, "Welcome to the echobox\n", 23, 0);
 
      bzero(buffer,256);
