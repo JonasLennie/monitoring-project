@@ -1,14 +1,5 @@
-/* The port number is passed as an argument */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h> 
-#define _BSD_SOURCE
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include "config.h"
+#include "./defaultIncludes.h"
+#include "./handler.h"
 
 void error(const char *msg)
 {
@@ -27,13 +18,17 @@ void newConnection(int newsockfd, int clilen, struct sockaddr_in cli_addr) {
      printf("server: got connection from %s port %d\n", inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port)); 
 
 
-     send(newsockfd, "Hello, world!\n", 14, 0);
+     send(newsockfd, "Welcome to the echobox\n", 23, 0);
 
      bzero(buffer,256);
 
      n = read(newsockfd,buffer,255);
+
      if (n < 0) error("ERROR reading from socket");
+
      printf("Here is the message: %s\n",buffer);
+
+    send(newsockfd, handleConnection(buffer), 255, 0);
 
      close(newsockfd);
 }
